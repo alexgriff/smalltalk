@@ -13,6 +13,3 @@ Conversation.create(user: User.all[1], partner: Partner.all[1])
 Topic.create(name:"Entertainment")
 Topic.create(name:"Politics")
 Topic.create(name:"Sports")
-
-
-

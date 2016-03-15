@@ -14,8 +14,17 @@
 #
 
 class User < ActiveRecord::Base
+  has_secure_password 
+
   has_many :conversations
   has_many :partners, :through => :conversations
   has_many :reviews, :through => :conversations 
   has_many :topics, :through => :conversations
+
+  validates :name, presence: true
+  validates :email, presence: true
+  validates_uniqueness_of :email
+  validtes :awkwardness, presence: true
+  
+
 end
