@@ -1,0 +1,37 @@
+<%= form_for @conversation do |f| %>
+  <%= f.label :partner_id , 'Select or Enter Your Conversation Partner' %></br>
+  
+  <%= f.collection_select :partner_id, current_user.partners, :id, :name %> </br>
+   
+  <%= label_tag :partner_name, 'Create a New Partner' %></br>
+  <%= text_field_tag :partner_name %> </br>
+
+  <%= f.label :topics, 'Choose a New Topic' %> </br>
+  <%= f.collection_check_boxes :topic_ids, Topic.all, :id, :name %> </br>
+
+  <%= f.label :reviews, "Rate Your Conversation" %>
+  <%= f.collection_radio_buttons :topic_ids, Topic.all, :id, :name %> </br>
+  <%= f.collection_radio_buttons :review, (1..5), :id. :name %> </br>
+
+  <%= f.submit %>
+<% end %>
+
+
+
+
+<!-- Create new conversation
+Select recipient or add a  recipient
+Select topic(s)
+Rate conversation
+Add comment to rating
+Submit
+ -->
+
+   <!-- create_table "conversations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "partner_id"
+    t.date     "time"
+    t.integer  "review_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end -->

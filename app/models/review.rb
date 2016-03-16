@@ -11,4 +11,8 @@
 
 class Review < ActiveRecord::Base
   belongs_to :conversation 
+
+  def review_range 
+  end
+
 end

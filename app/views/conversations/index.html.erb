@@ -1,0 +1,3 @@
+<% current_user.conversations.each do |convo| %>
+  <p>You talked to: <%= convo.partner.name %> </p>
+<% end %>
