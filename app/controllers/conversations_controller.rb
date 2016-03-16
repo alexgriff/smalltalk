@@ -2,15 +2,15 @@ class ConversationsController < ApplicationController
 
   def new
     @conversation = Conversation.new
-
+    @review = @conversation.build_review
   end
 
   def create
-    binding.pry
-    # params = {"conversation"=>{"partner_id"=>"1"},
+    # params = {"conversation"=>{"partner_id"=>"1", "topic_ids"=>["1", "2"], "review"=>{"rating"=>"4"}},
     # "partner_name"=>"Dude" }
     @conversation = Conversation.new(user: current_user)
-    
+    @conversation.build_review
+    binding.pry
     if params[:partner_name].present?
       user_partners = current_user.partners.map { |partner| partner.name }
 
@@ -31,5 +31,10 @@ class ConversationsController < ApplicationController
     redirect_to conversations_path
   end
 
+  private
+
+  def conversation_params
+    params.require(:conversation).permit()
+  end
 
 end
