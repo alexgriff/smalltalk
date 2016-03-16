@@ -29,11 +29,6 @@ class ConversationsController < ApplicationController
     redirect_to @conversation
   end
 
-  private
-
-  def conversation_params
-    params.require(:conversation).permit()
-  end
 
   private
 
