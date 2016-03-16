@@ -6,7 +6,6 @@
 #  user_id    :integer
 #  partner_id :integer
 #  time       :date
-#  review_id  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

@@ -6,7 +6,6 @@
 #  user_id    :integer
 #  partner_id :integer
 #  time       :date
-#  review_id  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -17,6 +16,7 @@ class Conversation < ActiveRecord::Base
   has_one :review 
   has_many :conversation_topics
   has_many :topics, through: :conversation_topics
+  accepts_nested_attributes_for :review
   
 
 end

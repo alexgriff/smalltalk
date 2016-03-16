@@ -10,11 +10,15 @@
   <%= f.collection_check_boxes :topic_ids, Topic.all, :id, :name %> </br>
 
   <%= f.label :reviews, "Rate Your Conversation" %>
-  <%= f.collection_radio_buttons :topic_ids, Topic.all, :id, :name %> </br>
-  <%= f.collection_radio_buttons :review, (1..5), :id. :name %> </br>
+    <%= f.fields_for :review do |button| %> 
+     <% (1..5).each do |num| %>
+      <%= num %>
+      <%= button.radio_button :rating, num %>
+    <% end %>
+<% end %><br>
 
   <%= f.submit %>
-<% end %>
+<% end %> 
 
 
 
