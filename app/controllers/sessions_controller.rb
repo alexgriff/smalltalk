@@ -1,4 +1,6 @@
-def new
+class SessionsController < ApplicationController
+
+  def new
   end
 
   def create

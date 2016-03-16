@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true
   validates_uniqueness_of :email
-  validtes :awkwardness, presence: true
+  validates :awkwardness, presence: true
   
 
 end
