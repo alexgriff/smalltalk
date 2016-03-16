@@ -1,0 +1,23 @@
+<h4>Your Conversation with <%= @conversation.partner.name %> </h4>
+
+You chatted about 
+<ul>
+  <% @conversation.topics.each do |topic| %>
+  <li><%= topic.name %></li>
+<% end %>
+</ul>
+
+You rated it <%= @conversation.review.rating %> out of 5.</br>
+<%= @conversation.review.review_message %>
+
+<strong>Comments</strong></br></br>
+  <%= form_tag conversation_path(@conversation), method:'patch' do %>
+    <%= text_area_tag :review_comment, @conversation.review.comment, {size: "55x10", placeholder: "Please write comment here" }  %></br>
+
+
+    <%= submit_tag "Save your comment" %>
+  <% end %></br>
+
+<%= link_to 'Edit', edit_conversation_path(@conversation) %></br>
+<%= link_to "Add a new conversation", new_conversation_path %></br>
+<%= link_to 'All conversations', conversations_path %></br>

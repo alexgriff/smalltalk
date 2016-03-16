@@ -1,4 +1,5 @@
 class ConversationsController < ApplicationController
+  before_action :find_conversation, only: [:show, :edit, :update, :destroy]
 
   def new
     @conversation = Conversation.new
@@ -8,7 +9,6 @@ class ConversationsController < ApplicationController
   def create
     # conversation => {"partner_id"=>"7", "topic_ids"=>["1", ""], "review"=>{"rating"=>"3"}},
     # "partner_name"=>"Dude" }
-
     @conversation = Conversation.new(user: current_user)
     #partner name
     if params[:partner_name].present?
@@ -25,19 +25,32 @@ class ConversationsController < ApplicationController
     else
       @conversation.partner = Partner.find(params[:conversation][:partner_id])
     end
-
     @conversation.update(conversation_params)
     @conversation.save
-    binding.pry
 
-    redirect_to conversations_path
+    redirect_to conversation_path(@conversation)
   end
+
+  def show
+  end
+
+  def update
+    @conversation.review.update(comment: params[:review_comment])
+    binding.pry
+    redirect_to @conversation
+  end
+
 
   private
 
   def conversation_params
     params.require(:conversation).permit(:partner_id, :topic_ids => [], :review_attributes =>[:rating])
   end
+
+  def find_conversation
+    @conversation = Conversation.find(params[:id])
+  end
+
 
 
 end

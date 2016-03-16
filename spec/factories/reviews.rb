@@ -7,6 +7,7 @@
 #  rating          :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  comment         :text
 #
 
 FactoryGirl.define do
