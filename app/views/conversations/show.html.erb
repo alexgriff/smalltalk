@@ -3,7 +3,7 @@
 You chatted about 
 <ul>
   <% @conversation.topics.each do |topic| %>
-  <li><%= topic.name %></li>
+  <li><%= link_to topic.name, topic_path(topic) %></li>
 <% end %>
 </ul>
 
