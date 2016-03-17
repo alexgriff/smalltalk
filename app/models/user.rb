@@ -58,17 +58,16 @@ class User < ActiveRecord::Base
     count_hash
   end
 
-  def number_of_conversations_about(topic)
-    self.conversations.where(topic: topic).count
-  end
-
+  # def number_of_conversations_about(topic)
+  #   self.conversations.where(topic: topic).count
+  # end
 
   def number_of_conversations_with(partner)
     self.conversations.where(partner: partner).count
   end
 
-  def most_frequent_partner
-    # look at all conversations with ?
+  def average_rating(partner)
+    v = self.conversations.where(partner: partner)
     binding.pry
   end
 
