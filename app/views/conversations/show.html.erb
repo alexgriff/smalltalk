@@ -1,4 +1,4 @@
-<h4>Your Conversation with <%= @conversation.partner.name %> </h4>
+<h4>Your Conversation with <%= link_to @conversation.partner.name, partner_path(@conversation.partner) %> </h4>
 
 You chatted about 
 <ul>
