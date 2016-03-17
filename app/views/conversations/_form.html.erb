@@ -1,15 +1,16 @@
 <%= form_for @conversation do |f| %>
-  <%= f.label :partner_id , 'Select or Enter Your Conversation Partner' %></br>
+  <%= f.label 'Select or Create Your Conversation Partner' %></br>
   
-  <%= f.collection_select :partner_id, current_user.partners.uniq, :id, :name %> </br>
+  <%= f.label :partner_id , 'Select a Partner' %>
+  <%= f.collection_select :partner_id, current_user.partners.uniq, :id, :name %>
    
-  <%= label_tag :partner_name, 'Create a New Partner' %></br>
+  <%= label_tag :partner_name, '-or- Add a New Partner' %>
   <%= text_field_tag :partner_name %> </br>
 
-  <%= f.label :time, 'Select the time of your conversation' %> </br>
+  <%= f.label :time, 'Select the date & time of your conversation' %> </br>
   <%= f.datetime_local_field :time %> </br>
   
-  <%= f.label :topics, 'Choose a New Topic' %> </br>
+  <%= f.label :topics, 'Select the Topics that came up in your convo' %> </br>
   <%= f.collection_check_boxes :topic_ids, Topic.all, :id, :name %> </br>
 
   

@@ -20,6 +20,9 @@ FactoryGirl.define do
     fun_fact { Faker::Hipster.word }
     sequence(:email) { |n| "first_name#{n}@idk.com".downcase }
     password_digest { "123" }
-    password_confirmation { "123"}
+    
+    
+    after(:create)  { |user| user.password_confirmation="123" }
   end
+  
 end
