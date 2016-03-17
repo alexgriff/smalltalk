@@ -10,6 +10,11 @@ Partner.create(name:"Kaitlin", age:34, gender:"F")
 Conversation.create(user: User.all[0], partner: Partner.all[0])
 Conversation.create(user: User.all[1], partner: Partner.all[1])
 
-Topic.create(name:"Entertainment")
-Topic.create(name:"Politics")
-Topic.create(name:"Sports")
+
+config_path = File.expand_path("../topics_file.txt", __FILE__)
+f = File.open(config_path) or die "Unable to open file..."
+ 
+  f.each_line {|line|
+    Topic.create(name: line)
+  }
+

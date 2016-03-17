@@ -27,18 +27,35 @@ class User < ActiveRecord::Base
   validates :awkwardness, presence: true
 
 
-# look at all conversations
-    # find the most discused conversation (group)
-    # get and return count 
+  def unique_topics_with(partner)
+    all_topics_with(partner).uniq
+  end
 
   def all_topics_with(partner)
     self.conversations.where(partner: partner).map do |convo|
       convo.topics
-    end.flatten.uniq
+    end.flatten
   end
 
   def most_frequent_topic_with(partner)
-    all_topics_with(partner).max
+    count_hash = topic_count_with(partner)
+    name = count_hash.key(count_hash.values.max)
+    Topic.find_by(name: name)
+  end
+
+  def topic_percentage_for_partner(partner, topic)
+    total_convos_with = number_of_conversations_with(partner)
+    num_convos_about_topic = topic_count_with(partner)[topic]
+    100 * (num_convos_about_topic.to_f/total_convos_with)
+  end
+
+  def topic_count_with(partner)
+    count_hash = Hash.new(0)
+    all_topics_with(partner).each do |topic|
+      name = topic.name
+      count_hash[name] += 1
+    end
+    count_hash
   end
 
   def number_of_conversations_about(topic)
