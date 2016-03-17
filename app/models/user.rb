@@ -27,7 +27,41 @@ class User < ActiveRecord::Base
   validates :awkwardness, presence: true
 
 
- 
+# look at all conversations
+    # find the most discused conversation (group)
+    # get and return count 
+
+  def all_topics_with(partner)
+    self.conversations.where(partner: partner).map do |convo|
+      convo.topics
+    end.flatten.uniq
+  end
+
+  def most_frequent_topic_with(partner)
+    all_topics_with(partner).max
+  end
+
+  def number_of_conversations_about(topic)
+    self.conversations.where(topic: topic).count
+  end
+
+
+  def number_of_conversations_with(partner)
+    self.conversations.where(partner: partner).count
+  end
+
+  def most_frequent_partner
+    # look at all conversations with ?
+    binding.pry
+  end
+
+# self.conversations.where(partner: partner)
+  # subset all users 
+
+
+
+
+
 
  
 

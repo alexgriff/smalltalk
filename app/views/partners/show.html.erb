@@ -1,9 +1,22 @@
 <h3><%= @partner.name %><h3>
-<p>you have had WRITE_METHOD number of conversations with <%= @partner.name %></p>
-<p>you had the most conversations with them about this topic: WRITE METHOD (topic and how much %) </p>
+<p>You have had <%= pluralize(current_user.number_of_conversations_with(@partner), 'conversation')%> with <%= @partner.name %></p>
+<p>You have discussed 
+  <ul>
+  <% current_user.all_topics_with(@partner).each do |topic| %> 
+    <li><%= link_to topic.name, topic_path(topic) %></li>
+  <% end %>
+  </p>
+  </ul>
+
+<p>You had the most conversations with them about this topic: 
+  <ul>
+    <li><%= current_user.most_frequent_topic_with(@partner).name %></li> 
+</ul></p>
 <p>and your average conversation was rated: WRITE METHOD</p>
 <p>Try bringing up TOPIC-WRITE METHOD with <%= @partner.name %>, its one of their favorite topics!</p>
 
 <p>INSERT list of all topics for this partner with links</p>
 
 <%= link_to "all of your conversation partners",  partners_path %>
+
+
