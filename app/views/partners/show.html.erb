@@ -9,12 +9,13 @@
   </ul>
 
 <% topic = current_user.most_frequent_topic_with(@partner).name %>
-<p> <%= current_user.topic_percentage_for_partner(@partner,topic) %> of your conversations with <%= @partner.name %> involved <%= topic %> making it your most chatted about topic! </p> 
+
+<p> <%= current_user.topic_percentage_for_partner(@partner,topic) %>% of your conversations with <%= @partner.name %> involved <%= topic %> making it your most chatted about topic! </p> 
   
 <p>and your average conversation was rated: WRITE METHOD</p>
+
 <p>Try bringing up TOPIC-WRITE METHOD with <%= @partner.name %>, its one of their favorite topics!</p>
 
-<p>INSERT list of all topics for this partner with links</p>
 
 <%= link_to "all of your conversation partners",  partners_path %>
 
