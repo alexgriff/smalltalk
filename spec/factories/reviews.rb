@@ -12,7 +12,12 @@
 
 FactoryGirl.define do
   factory :review do
-    conversation_id 1
-    rating 1
+    rating {rand(1..5)}
+    comment {Faker::Lorem.sentence}
+
+
+    trait :really_bad_convo do
+      rating 1
+    end
   end
 end

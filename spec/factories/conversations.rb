@@ -12,9 +12,9 @@
 
 FactoryGirl.define do
   factory :conversation do
-    user_id { Faker::Number.between(1, 100) }
-    partner_id { Faker::Number.between(1, 100) }
-    time { Faker::Time.between(2.years.ago, Time.now, :all) }
+    association :user
+    association :partner
+    review factory: :review
   end
 end
 

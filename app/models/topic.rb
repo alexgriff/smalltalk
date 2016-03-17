@@ -12,5 +12,5 @@ class Topic < ActiveRecord::Base
   has_many :conversation_topics
   has_many :conversations, through: :conversation_topics
   has_many :users, through: :conversations
-  has_many :partners, through: :conversations 
+  has_many :partners, through: :conversations
 end
