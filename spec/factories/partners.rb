@@ -10,10 +10,13 @@
 #  updated_at :datetime         not null
 #
 
+genders = ["male", "female"]
+
 FactoryGirl.define do
   factory :partner do
-    name "MyString"
-    gender "MyString"
-    age 1
+    name { Faker::Name.name }
+    gender genders.sample
+    age { Faker::Number.between(1,120)}
   end
 end
+

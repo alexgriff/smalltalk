@@ -13,7 +13,7 @@
 class Conversation < ActiveRecord::Base
   belongs_to :user
   belongs_to :partner
-  has_one :review 
+  has_one :review, dependent: :destroy 
   has_many :conversation_topics
   has_many :topics, through: :conversation_topics
   accepts_nested_attributes_for :review
