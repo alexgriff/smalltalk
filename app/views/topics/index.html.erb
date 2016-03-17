@@ -1,6 +1,6 @@
 <ul>
 <% Topic.all.each do |topic| %>
   <li><%= link_to topic.name, topic_path(topic) %> -
-      Average Rating WRITE METHOD </li>
+      <%= current_user.test(topic) %> stars </li>
 <% end %>
 </ul>

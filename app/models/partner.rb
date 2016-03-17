@@ -15,4 +15,9 @@ class Partner < ActiveRecord::Base
   has_many :reviews, through: :conversations
   has_many :users, through: :conversations
   has_many :topics, through: :conversations 
+
+
+
+
 end
+

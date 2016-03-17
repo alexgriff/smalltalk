@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
     all_topics_with(partner).uniq
   end
 
+
   def all_topics_with(partner)
     self.conversations.where(partner: partner).map do |convo|
       convo.topics
@@ -94,7 +95,7 @@ class User < ActiveRecord::Base
   end
 
   def topic_count_average_for(topic)
-    binding.pry
+    # binding.pry
     self.topics.where(id: topic.id)
     .each do |topic|
     end
@@ -105,7 +106,23 @@ class User < ActiveRecord::Base
   
 # self.topics.where(id: topic.id)
 
+  def array_of_ratings_by_user
+    self.reviews.map do |review|
+      review.rating
+    end 
+  end 
 
+  def test(topic)
+     reviews_with_given_topic = self.reviews.select do |review| review.conversation.topics.include?(topic)
+     end
+     array_rating_given_topic = reviews_with_given_topic.map do |review| review.rating end 
+      ave = array_rating_given_topic.sum.to_f / array_rating_given_topic.size
+
+  end 
+
+   
+
+ 
 
  
 
