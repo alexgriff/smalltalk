@@ -8,8 +8,12 @@
 #  updated_at :datetime         not null
 #
 
+
+topics = ["Politics", "Sports", "Celebrity Gossip", "Weather", "Art"]
+
+
 FactoryGirl.define do
   factory :topic do
-    name "MyString"
+    name topics.sample
   end
 end
