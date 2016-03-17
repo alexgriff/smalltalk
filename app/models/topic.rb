@@ -21,4 +21,6 @@ class Topic < ActiveRecord::Base
   def self.least_rated_topic_by_users
 
   end  
+  has_many :partners, through: :conversations
+
 end
