@@ -15,11 +15,11 @@
 
 FactoryGirl.define do
   factory :user do
-    name { Faker::Name.name }
+    name { Faker::Name.first_name }
     awkwardness { Faker::Number.between(1,10)}
     fun_fact { Faker::Hipster.word }
-    sequence(:email) { |n| "#{name}n@whatever.com".downcase }
-    password_digest { Faker::Internet.password }
-    password_confirmation { "#{password_digest}"}
+    sequence(:email) { |n| "first_name#{n}@idk.com".downcase }
+    password_digest { "123" }
+    password_confirmation { "123"}
   end
 end
