@@ -94,10 +94,10 @@ class User < ActiveRecord::Base
   end
 
   def topic_count_average_for(topic)
-    binding.pry
-    self.topics.where(id: topic.id)
-    .each do |topic|
-    end
+    # binding.pry
+    # self.topics.where(id: topic.id)
+    # .each do |topic|
+    # end
     # gather all the converations on that topic
     # gather ratings
     # take them all and divide by number of conversations
