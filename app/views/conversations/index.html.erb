@@ -1,3 +1,10 @@
-<% current_user.conversations.each do |convo| %>
-  <p>You talked to: <%= convo.partner.name %> </p>
+<p>You talked to: <% current_user.partners.uniq.each do |partner| %>
+ <%= link_to partner.name, partner_path(partner) %> |
 <% end %>
+</p>
+Time: ( bootstrap calendar? )
+<% current_user.conversations.each do |convo| %>
+  <p> <%= link_to convo.time %> </p>
+<% end %>
+
+

@@ -25,20 +25,20 @@ class ConversationsController < ApplicationController
   end
 
   def update
-    @conversation.review.update(comment: params[:review_comment])
+    if @conversation.review.update(comment: params[:review_comment])
+      flash[:notice] = "Comment was successfully created!"
     redirect_to @conversation
+    end 
   end
 
   private
 
   def conversation_params
-    params.require(:conversation).permit(:partner_id, :topic_ids => [], :review_attributes =>[:rating])
+    params.require(:conversation).permit(:partner_id, :time, :topic_ids => [], :review_attributes =>[:rating])
   end
 
   def find_conversation
     @conversation = Conversation.find(params[:id])
   end
-
-
 
 end

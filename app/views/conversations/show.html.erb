@@ -1,4 +1,5 @@
 <h4>Your Conversation with <%= link_to @conversation.partner.name, partner_path(@conversation.partner) %> </h4>
+at <%= "#{@conversation.time}" %>. 
 
 You chatted about 
 <ul>
@@ -10,12 +11,17 @@ You chatted about
 You rated it <%= @conversation.review.rating %> out of 5.</br>
 <%= @conversation.review.review_message %>
 
+
+<p>
+
 <strong>Comments</strong></br></br>
+<font size="3" color="blue" strong><%= flash[:notice] %></font>
   <%= form_tag conversation_path(@conversation), method:'patch' do %>
     <%= text_area_tag :review_comment, @conversation.review.comment, {size: "55x10", placeholder: "Please write comment here" }  %></br>
-
-
+</p>
     <%= submit_tag "Save your comment" %>
+    
+
   <% end %></br>
 
 <%= link_to 'Edit', edit_conversation_path(@conversation) %></br>

@@ -6,8 +6,14 @@
   <%= label_tag :partner_name, 'Create a New Partner' %></br>
   <%= text_field_tag :partner_name %> </br>
 
+  <%= f.label :time, 'Select the time of your conversation' %> </br>
+  <%= f.datetime_local_field :time %> </br>
+  
   <%= f.label :topics, 'Choose a New Topic' %> </br>
   <%= f.collection_check_boxes :topic_ids, Topic.all, :id, :name %> </br>
+
+  
+
 
   <%= f.label :reviews, "Rate Your Conversation" %>
     <%= f.fields_for :review do |button| %> 
@@ -19,4 +25,3 @@
 
   <%= f.submit %>
 <% end %> 
-
