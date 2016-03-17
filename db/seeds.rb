@@ -7,8 +7,11 @@ Partner.create(name: "Billy", age:19, gender:"M")
 Partner.create(name: "Ian", age:23, gender:"M")
 Partner.create(name:"Kaitlin", age:34, gender:"F")
 
-Conversation.create(user: User.all[0], partner: Partner.all[0])
-Conversation.create(user: User.all[1], partner: Partner.all[1])
+convo = Conversation.create(user: User.all[0], partner: Partner.all[0])
+convo2 = Conversation.create(user: User.all[1], partner: Partner.all[1])
+
+convo.review = Review.new(rating: 4, comment: "This worked")
+convo2.review = Review.new(rating: 1, comment: "I made bad jokes")
 
 
 config_path = File.expand_path("../topics_file.txt", __FILE__)

@@ -12,7 +12,7 @@
 
 <p> <%= current_user.topic_percentage_for_partner(@partner,topic) %>% of your conversations with <%= @partner.name %> involved <%= topic %> making it your most chatted about topic! </p> 
   
-<p>and your average conversation was rated: current_user.average_rating(partner)</p>
+<p>Your average conversation was rated: <%= current_user.average_rating(@partner) %> stars</p>
 
 <p>Try bringing up TOPIC-WRITE METHOD with <%= @partner.name %>, its one of their favorite topics!</p>
 

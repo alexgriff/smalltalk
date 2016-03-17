@@ -67,8 +67,12 @@ class User < ActiveRecord::Base
   end
 
   def average_rating(partner)
-    v = self.conversations.where(partner: partner)
-    binding.pry
+    all_ratings = self.conversations.where(partner: partner).map do |convo|
+      if convo.review 
+        convo.review.rating
+      end
+    end.compact
+    avg = (all_ratings.sum.to_f/all_ratings.count)
   end
 
 # self.conversations.where(partner: partner)
