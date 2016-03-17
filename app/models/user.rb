@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates :awkwardness, presence: true
 
-
+###### Partner Methods #######
   def unique_topics_with(partner)
     all_topics_with(partner).uniq
   end
@@ -75,10 +75,23 @@ class User < ActiveRecord::Base
     avg = (all_ratings.sum.to_f/all_ratings.count)
   end
 
-# self.conversations.where(partner: partner)
-  # subset all users 
+###### Topic Methods #######
+  def topic_count(topic)
+      self.topics.where(id: topic.id).count
+  end
 
+  def total_topic_count
+    count_hash = Hash.new(0)
+    self.topics.each do |topic|
+      name = topic.name
+      count_hash[name] += 1
+    end
+    count_hash
+  end
 
+  def topic_count_for(topic)
+    (topic_count(topic).to_f/self.conversations.size) * 100
+  end
 
 
 
