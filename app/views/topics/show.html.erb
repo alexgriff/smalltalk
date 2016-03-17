@@ -3,10 +3,14 @@
 
 <p>In <%= current_user.topic_count_for(@topic).round(2) %> percent of your conversations, you talked about <%= @topic.name %>.</p>
 
-<p>on average a conversation where you talked about <%= @topic.name %> was rated: WRITE METHOD</p>
+<p>on average a conversation where you talked about <%= @topic.name %> was rated: <%= current_user.topic_count_average_for(@topic) %></p>
 
 <p>This topic is particularly highly rated for these partners: WRITE METHOD</p>
 
 <p>INSERT list of all partners you talked about <%= @topic.name %> with,  with links</p>
 
 <%= link_to "all topics",  topics_path %>
+
+
+add / commit / push
+then do a pull request

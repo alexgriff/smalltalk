@@ -1,8 +1,9 @@
-<h3>smalltalk Partners</h3>
+<h3>SmallTalk Partners</h3>
 <ul>
 <% current_user.partners.uniq.each do |partner| %>
   <li><%= link_to partner.name, partner_path(partner)%> -
-      <%= "(WRITE METHOD avg rating for this user)" %>
+      <%= current_user.average_rating(partner) %> stars
   </li>
 <% end %>
 </ul>
+
