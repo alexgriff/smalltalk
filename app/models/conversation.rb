@@ -17,6 +17,15 @@ class Conversation < ActiveRecord::Base
   has_many :conversation_topics
   has_many :topics, through: :conversation_topics
   accepts_nested_attributes_for :review
+
+
+  def associate_or_create_partner_by_name(name)
+    if self.user.partners.find_by(name: name)
+      partner = user.partners.find_by(name: name)
+    else
+      self.partner = Partner.create(name: name)
+    end
+  end
   
 
 end

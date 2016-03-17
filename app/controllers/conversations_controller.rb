@@ -7,28 +7,18 @@ class ConversationsController < ApplicationController
   end
 
   def create
-    # conversation => {"partner_id"=>"7", "topic_ids"=>["1", ""], "review"=>{"rating"=>"3"}},
+    # params = {"conversation"=>{"partner_id"=>"1", "topic_ids"=>["1", "2"], "review_attributes"=>{"rating"=>"4"}},
     # "partner_name"=>"Dude" }
-    @conversation = Conversation.new(user: current_user)
-    #partner name
+    
+    @conversation = current_user.conversations.build(conversation_params)
+   
     if params[:partner_name].present?
-      user_partners = current_user.partners.map { |partner| partner.name }
-
-       #user typed name
-      if user_partners.include?(params[:partner_name])
-        @conversation.partner = current_user.partners.where(name: params[:partner_name])
-      else
-        @conversation.partner = Partner.create(name: params[:partner_name])
-      end
-
-    #user select from the existing name list
-    else
-      @conversation.partner = Partner.find(params[:conversation][:partner_id])
+      @conversation.associate_or_create_partner_by_name(params[:partner_name])
     end
-    @conversation.update(conversation_params)
-    @conversation.save
 
+    @conversation.save
     redirect_to conversation_path(@conversation)
+
   end
 
   def show
@@ -36,10 +26,8 @@ class ConversationsController < ApplicationController
 
   def update
     @conversation.review.update(comment: params[:review_comment])
-    binding.pry
     redirect_to @conversation
   end
-
 
   private
 

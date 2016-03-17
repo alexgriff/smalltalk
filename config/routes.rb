@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
   resources :conversations
+  resources :partners, only: [:show, :index, :edit, :update]
+  resources :topics, only: [:show, :index]
 
   root to: 'pages#home' 
 

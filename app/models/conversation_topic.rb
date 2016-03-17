@@ -12,4 +12,5 @@
 class ConversationTopic < ActiveRecord::Base
   belongs_to :conversation
   belongs_to :topic 
+
 end

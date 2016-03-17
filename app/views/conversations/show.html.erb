@@ -1,9 +1,9 @@
-<h4>Your Conversation with <%= @conversation.partner.name %> </h4>
+<h4>Your Conversation with <%= link_to @conversation.partner.name, partner_path(@conversation.partner) %> </h4>
 
 You chatted about 
 <ul>
   <% @conversation.topics.each do |topic| %>
-  <li><%= topic.name %></li>
+  <li><%= link_to topic.name, topic_path(topic) %></li>
 <% end %>
 </ul>
 
