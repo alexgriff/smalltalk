@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   def topic_percentage_for_partner(partner, topic)
     total_convos_with = number_of_conversations_with(partner)
     num_convos_about_topic = topic_count_with(partner)[topic]
-    100 * (num_convos_about_topic.to_f/total_convos_with)
+    (100 * (num_convos_about_topic.to_f/total_convos_with)).round(2)
   end
 
   def topic_count_with(partner)
@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
         convo.review.rating
       end
     end.compact
-    avg = (all_ratings.sum.to_f/all_ratings.count)
+    (all_ratings.sum.to_f/all_ratings.count).round(2)
   end
 
 ###### Topic Methods #######
@@ -91,25 +91,11 @@ class User < ActiveRecord::Base
   end
 
   def topic_count_for(topic)
-    (topic_count(topic).to_f/self.conversations.size) * 100
+    ((topic_count(topic).to_f/self.conversations.size) * 100).round(2)
   end
 
-  def topic_count_average_for(topic)
-
-    self.topics.where(id: topic.id)
-    .each do |topic|
-    end
-
-    # self.topics.where(id: topic.id)
-    # .each do |topic|
-    # end
-
-    # gather all the converations on that topic
-    # gather ratings
-    # take them all and divide by number of conversations
-  end
   
-# self.topics.where(id: topic.id)
+
 
   def array_of_ratings_by_user
     self.reviews.map do |review|
@@ -118,11 +104,11 @@ class User < ActiveRecord::Base
   end 
 
   def test(topic)
-     reviews_with_given_topic = self.reviews.select do |review| review.conversation.topics.include?(topic)
+    reviews_with_given_topic = self.reviews.select do |review| 
+      review.conversation.topics.include?(topic)
      end
-     array_rating_given_topic = reviews_with_given_topic.map do |review| review.rating end 
-      ave = array_rating_given_topic.sum.to_f / array_rating_given_topic.size
-
+    ratings = reviews_with_given_topic.map { |review| review.rating } 
+    (ratings.sum.to_f / ratings.size).round(2)
   end 
 
    
