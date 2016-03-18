@@ -59,10 +59,6 @@ class User < ActiveRecord::Base
     count_hash
   end
 
-  def number_of_conversations_about(topic)
-    self.conversations.where(topic: topic).count
-  end
-
   def number_of_conversations_with(partner)
     self.conversations.where(partner: partner).count
   end
@@ -93,16 +89,7 @@ class User < ActiveRecord::Base
   def topic_count_for(topic)
     ((topic_count(topic).to_f/self.conversations.size) * 100).round(2)
   end
-  
-
-
-  # user's average rating of the given topic 
-  def ave_rating(topic)
-     reviews = self.reviews.select do |review| review.conversation.topics.include?(topic)
-     end
-     topic_ratings = reviews.map do |review| review.rating end   
-      topic_ratings.sum.to_f / topic_ratings.size
-  end  
+   
 
   #returns user's reviews with rating >= 4
   def high_rated_reviews
@@ -148,8 +135,17 @@ class User < ActiveRecord::Base
     else
       0
     end
+  end
 
-  end 
+  def all_partners_with(topic)
+    
+  end
+
+  # def all_topics_with(partner)
+  #   self.conversations.where(partner: partner).map do |convo|
+  #     convo.topics
+  #   end.flatten
+  # end
   
 
 end
