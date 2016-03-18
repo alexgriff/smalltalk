@@ -103,12 +103,16 @@ class User < ActiveRecord::Base
     end 
   end 
 
-  def test(topic)
+  def average_rating_for_topic(topic)
     reviews_with_given_topic = self.reviews.select do |review| 
       review.conversation.topics.include?(topic)
      end
-    ratings = reviews_with_given_topic.map { |review| review.rating } 
-    (ratings.sum.to_f / ratings.size).round(2)
+    if reviews_with_given_topic.present?
+      ratings = reviews_with_given_topic.map { |review| review.rating } 
+      (ratings.sum.to_f / ratings.size).round(2)
+    else
+      0
+    end
   end 
 
    

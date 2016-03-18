@@ -14,13 +14,8 @@ class Topic < ActiveRecord::Base
   has_many :users, through: :conversations
   has_many :partners, through: :conversations 
 
-  def self.most_high_rated_topic_by_users
-     
-  end 
+  
 
-  def self.least_rated_topic_by_users
 
-  end  
-  has_many :partners, through: :conversations
 
 end

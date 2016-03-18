@@ -15,6 +15,7 @@ FactoryGirl.define do
     association :user
     association :partner
     review factory: :review
+    time {Faker::Time.between(1.month.ago, Time.now)}
   end
 end
 
