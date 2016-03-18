@@ -130,7 +130,7 @@ class User < ActiveRecord::Base
   #conversation with low_rating
   def conversations_with_low_rating
     self.conversations_with_low_rating
-
+  end
 
   def array_of_ratings_by_user
     self.reviews.map do |review|
@@ -152,5 +152,5 @@ class User < ActiveRecord::Base
   end 
   
 
-end 
+end
 
