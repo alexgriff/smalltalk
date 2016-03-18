@@ -1,7 +1,9 @@
-<p>You talked to: <% current_user.partners.uniq.each do |partner| %>
+<div class="talked_to">
+  <p>You talked to: <% current_user.partners.uniq.each do |partner| %>
  <%= link_to partner.name, partner_path(partner) %> |
 <% end %>
 </p>
+</div>
 <!-- Time: ( bootstrap calendar? ) -->
 <h3> Conversations sorted by most recent </h3>
 <ul>
