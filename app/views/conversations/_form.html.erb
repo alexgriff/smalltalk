@@ -3,6 +3,7 @@
   
   <%= f.label :partner_id , 'Select a Partner' %>
   <%= f.collection_select :partner_id, current_user.partners.uniq, :id, :name %>
+
    
   <%= label_tag :partner_name, '-or- Add a New Partner' %>
   <%= text_field_tag :partner_name %> </br>

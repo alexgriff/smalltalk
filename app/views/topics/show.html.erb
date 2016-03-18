@@ -4,7 +4,7 @@
 <p>In <%= current_user.topic_count_for(@topic).round(2) %> percent of your conversations, you talked about <%= @topic.name %>.</p>
 
 <p>on average a conversation where you talked about <%= @topic.name %> was rated:
-  <%= current_user.test(@topic)%> </p> 
+  <%= current_user.ave_rating(@topic)%> </p> 
 
 <p>This topic is particularly highly rated for these partners: WRITE METHOD</p>
 

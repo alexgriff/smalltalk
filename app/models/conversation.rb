@@ -27,5 +27,36 @@ class Conversation < ActiveRecord::Base
     end
   end
   
+  #conversations within a month
+  def self.this_month 
+    where(time: 1.month.ago..Time.now)
+  end 
+  
+  #5 most recent conversations
+  def self.most_recent
+   self.order('time DESC').first(5)
+  end 
+  
+  #conversations with ratings >=4
+  def self.high_ratings
+    joins(:review).merge(Review.high_ratings)
+  end 
+  
+  #conversations wiith ratings <=1
+  def self.low_ratings
+    joins(:review).merge(Review.low_ratings)
+  end 
 
+  # Need to Test
+  # #conversation that the user had with male/female partner
+  # def self.with_male_partner
+  #   self.joins(:partner).merge(Partner.male)
+  # end 
+  
+
+  # def self.with_female_partner
+  #   self.joins(:partner).merge(Partner.female)
+  # end 
+
+ 
 end
