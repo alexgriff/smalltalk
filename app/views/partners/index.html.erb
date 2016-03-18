@@ -5,7 +5,6 @@
 <% sorted_partners.each do |partner| %>
   <li><%= link_to partner.name, partner_path(partner)%> -
       <%= current_user.average_rating(partner) %> stars
-      <%= "(You haven't had any conversations about this topic, try it out or continue avoiding it!)" if current_user.average_rating(partner) == 0 %>
   </li>
 <% end %>
 </ul>
