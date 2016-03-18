@@ -25,6 +25,8 @@ end
     rand(0..9).times do
       convo = Conversation.create(user: user, partner: Partner.all.sample)
       convo.review = FactoryGirl.create :review
+      convo.time = Faker::Time.between(1.month.ago, Time.now)
+      
       rand(1..3).times do
         convo.topics << Topic.all.sample
       end
