@@ -13,22 +13,12 @@
 <p> <%= current_user.topic_percentage_for_partner(@partner,topic) %>% of your conversations with <%= @partner.name %> involved <%= topic %> making it your most chatted about topic! </p> 
   
 <p>Your average conversation was rated: <%= current_user.average_rating(@partner) %> stars</p>
-
-<p>You have spoken to <%= @partner.name %> about: </p>
-<ul>  
-  <% current_user.all_topics_with(@partner).each do |t| %>
-    <li>
-    <%= link_to t.name, topic_path(t)%>
-    </li>
-  <% end %>
-</ul>
-
 </br>
 
 
 
 <%= link_to "see all of your conversation partners",  partners_path %></br></br>
 <%= link_to "Back to my homepage", user_path(current_user) %>
-
+  
 
 
