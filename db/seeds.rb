@@ -19,7 +19,7 @@ f = File.open(config_path) or die "Unable to open file..."
 end
 
 # make each user have some more conversations
-2.times do
+5.times do
   
   User.all.each do |user|
     rand(0..9).times do
