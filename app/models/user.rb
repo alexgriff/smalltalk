@@ -58,10 +58,6 @@ class User < ActiveRecord::Base
     count_hash
   end
 
-  def number_of_conversations_about(topic)
-    self.conversations.where(topic: topic).count
-  end
-
   def number_of_conversations_with(partner)
     self.conversations.where(partner: partner).count
   end
@@ -97,6 +93,10 @@ class User < ActiveRecord::Base
   def high_rated_reviews
     self.reviews.high_ratings
   end
+
+ # def number_of_conversations_about(topic)
+ #    self.conversations.where(topic: topic).count
+ #  end
   
   #returns array of most frequent conversation partners
   def most_frequent_convo_partners 
