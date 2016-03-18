@@ -46,7 +46,7 @@ h2 {
 }
 
 p {
-  font-size: 1.1em;
+  font-size: .75em;
   line-height: 1.7em;
 }
 
@@ -61,6 +61,7 @@ p {
   padding-top: 9px;
   font-weight: bold;
 }
+
 
 #logo:hover {
   color: #fff;
@@ -96,4 +97,10 @@ footer ul {
 footer ul li {
   float: left;
   margin-left: 15px;
+}
+
+/* talked_to */
+
+.talked_to a, { 
+  font-size: 1.25em  
 }
