@@ -18,6 +18,7 @@ f = File.open(config_path) or die "Unable to open file..."
   convo.save
 end
 
+
 # make each user have some more conversations
 5.times do
   
