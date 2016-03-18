@@ -1,15 +1,15 @@
 <h3><%= @topic.name %></h3>
-<p>You have had <%= pluralize(current_user.topic_count(@topic), "conversation") %> about <%= @topic.name %>.</p>
+<p>You have had <span><%= pluralize(current_user.topic_count(@topic), "conversation") %></span> about <span><%= @topic.name %></span></p>
 
-<p>In <%= current_user.topic_count_for(@topic).round(2) %> percent of your conversations, you talked about <%= @topic.name %>.</p>
+<p>In <span><%= current_user.topic_count_for(@topic).round(2) %> %</span> of your conversations, you talked about <span><%= @topic.name %></span>.</p>
 
-<p>on average a conversation where you talked about <%= @topic.name %> was rated: 
+<p>on average a conversation where you talked about <span><%= @topic.name %></span> was rated: 
 
-  <%= current_user.average_rating_for_topic(@topic)%> </p> 
+  <span><%= current_user.average_rating_for_topic(@topic)%> stars</span></p> 
 
 
 
-<p>You talked about <%= @topic.name %> with: </p>
+<p>You talked about <span><%= @topic.name %></span> with: </p>
 <ul>
   <% current_user.all_partners_with(@topic).each do |partner| %>
     <li>
