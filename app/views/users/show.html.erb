@@ -7,6 +7,24 @@ Hi <%= current_user.name %>! </br></br>
 <%= link_to "Create a conversation", new_conversation_path  %> </br></br>
 <%= link_to "Review your conversation", conversations_path %>  </br></br>
 
+<h2>Your Top 5 Conversations</h2>
+
+<% current_user.conversations_with_high_rating.order('time DESC').first(5).each do |conversation| %>
+<p><%= conversation.time.to_date %> | 
+<%= Partner.find(conversation.partner_id).name %> |
+<%= conversation.topics.pluck(:name).join %> |
+<%= conversation.review.rating %> 
+</p>
+<% end %>
+
+<h2>Your Favorite Conversation Topic</h2>
+<% topic = current_user.topics.highest_rated %>
+<%= topic.name %> |
+
+
+
+
+
 
 
 
