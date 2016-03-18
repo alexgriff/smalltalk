@@ -51,6 +51,7 @@ class User < ActiveRecord::Base
   end
 
   def topic_count_with(partner)
+    binding.pry
     count_hash = Hash.new(0)
     all_topics_with(partner).each do |topic|
       name = topic.name
