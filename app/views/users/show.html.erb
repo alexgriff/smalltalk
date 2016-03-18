@@ -19,8 +19,9 @@ Hi <%= current_user.name %>! </br></br>
 
 <h2>Your Favorite Conversation Topic</h2>
 <% topic = current_user.topics.highest_rated %>
-<%= topic.name %> |
-
+<%= topic.name %> | <%=  current_user.topic_count(topic) %>
+  
+ 
 
 
 

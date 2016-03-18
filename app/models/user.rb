@@ -88,12 +88,7 @@ class User < ActiveRecord::Base
   def topic_count_for(topic)
     ((topic_count(topic).to_f/self.conversations.size) * 100).round(2)
   end
-<<<<<<< HEAD
-   
 
-=======
-  
->>>>>>> friday
   #returns user's reviews with rating >= 4
   def high_rated_reviews
     self.reviews.high_ratings
