@@ -1,4 +1,4 @@
-<h3><%= @partner.name %><h3>
+<h3><%= @partner.name %></h3>
 <p>You have had <%= pluralize(current_user.number_of_conversations_with(@partner), 'conversation')%> with <%= @partner.name %></p>
 <p>You have discussed 
   <ul>
@@ -10,7 +10,7 @@
 
 <% topic = current_user.most_frequent_topic_with(@partner).name %>
 
-<p> <%= current_user.topic_percentage_for_partner(@partner,topic) %>% of your conversations with <%= @partner.name %> involved <%= topic %> making it your most chatted about topic! </p> 
+<p> <%= current_user.topic_percentage_for_partner(@partner,topic) %>% of your conversations with <%= @partner.name %> involved <%= topic %> making it your most chatted about topic with this conversation partner! </p> 
   
 <p>Your average conversation was rated: <%= current_user.average_rating(@partner) %> stars</p>
 </br>

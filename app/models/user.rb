@@ -138,7 +138,9 @@ class User < ActiveRecord::Base
   end
 
   def all_partners_with(topic)
-    
+    self.conversations.joins(:topics).where(topics: {id: topic.id}).map do |convo|
+     convo.partner
+   end.flatten.uniq
   end
 
   # def all_topics_with(partner)

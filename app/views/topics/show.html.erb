@@ -1,4 +1,4 @@
-<h3><%= @topic.name %><h3>
+<h3><%= @topic.name %></h3>
 <p>You have had <%= pluralize(current_user.topic_count(@topic), "conversation") %> about <%= @topic.name %>.</p>
 
 <p>In <%= current_user.topic_count_for(@topic).round(2) %> percent of your conversations, you talked about <%= @topic.name %>.</p>
@@ -8,9 +8,17 @@
   <%= current_user.average_rating_for_topic(@topic)%> </p> 
 
 
-<p>This topic is particularly highly rated for these partners: WRITE METHOD</p>
 
-<p>INSERT list of all partners you talked about <%= @topic.name %> with,  with links</p>
+<p>You talked about <%= @topic.name %> with: </p>
+<ul>
+  <% current_user.all_partners_with(@topic).each do |partner| %>
+    <li>
+    <%= link_to partner.name, partner_path(partner) %>
+    </li>
+  <% end %>
+</ul>
+
+</br>
 
 <%= link_to "All Topics",  topics_path %></br></br>
 <%= link_to "Back to my my homepage", user_path(current_user) %>
