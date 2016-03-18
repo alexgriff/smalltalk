@@ -53,7 +53,6 @@ class Conversation < ActiveRecord::Base
     self.joins(:partner).merge(Partner.male)
   end 
   
-
   def self.with_female_partner
     self.joins(:partner).merge(Partner.female)
   end 

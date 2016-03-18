@@ -31,7 +31,6 @@ class User < ActiveRecord::Base
     all_topics_with(partner).uniq
   end
 
-
   def all_topics_with(partner)
     self.conversations.where(partner: partner).map do |convo|
       convo.topics
@@ -49,7 +48,7 @@ class User < ActiveRecord::Base
     num_convos_about_topic = topic_count_with(partner)[topic]
     (100 * (num_convos_about_topic.to_f/total_convos_with)).round(2)
   end
-
+  
   def topic_count_with(partner)
     count_hash = Hash.new(0)
     all_topics_with(partner).each do |topic|
@@ -94,16 +93,6 @@ class User < ActiveRecord::Base
     ((topic_count(topic).to_f/self.conversations.size) * 100).round(2)
   end
   
-
-
-  # user's average rating of the given topic 
-  def ave_rating(topic)
-     reviews = self.reviews.select do |review| review.conversation.topics.include?(topic)
-     end
-     topic_ratings = reviews.map do |review| review.rating end   
-      topic_ratings.sum.to_f / topic_ratings.size
-  end  
-
   #returns user's reviews with rating >= 4
   def high_rated_reviews
     self.reviews.high_ratings
@@ -118,26 +107,37 @@ class User < ActiveRecord::Base
   end  
 
   #returns converesations that the user had this month
-  def conversation_this_month
+  def conversations_this_month
     self.conversations.this_month
   end
   
-  #conversations with high rating 
+  #conversations with high rating >=4
   def conversations_with_high_rating
    self.conversations.high_ratings
   end 
   
-  #conversation with low_rating
+  #conversation with low_rating =< 1
   def conversations_with_low_rating
-    self.conversations_with_low_rating
+    self.conversations.low_ratings
   end
-
-  def array_of_ratings_by_user
-    self.reviews.map do |review|
-      review.rating
-    end 
+ 
+  #all the rating 
+  def rating_list
+   self.reviews.pluck(:rating)
   end 
 
+  #highest rated topic by the user
+  def highest_rated_topic
+    self.topics.highest_rated
+  end 
+  
+  #lowest rated topic by the user 
+  def lowest_rated_topic 
+    self.topics.lowest_rated
+  end 
+
+  
+  #average rating of the given topic by the user
   def average_rating_for_topic(topic)
     reviews_with_given_topic = self.reviews.select do |review| 
       review.conversation.topics.include?(topic)
@@ -148,9 +148,7 @@ class User < ActiveRecord::Base
     else
       0
     end
-
-  end 
+   end 
   
-
 end
 

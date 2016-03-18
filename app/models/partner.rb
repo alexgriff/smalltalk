@@ -27,14 +27,15 @@ class Partner < ActiveRecord::Base
    age_all.sum / age_all.count 
  end 
 
+#female partners of the conversation list 
  def self.female
   self.all.group_by {|partner| partner.gender}.fetch("F")   
  end 
 
+#male partners of the conversation list 
  def self.male
   self.all.group_by {|partner| partner.gender}.fetch("M")
  end 
-
 
 end
 
