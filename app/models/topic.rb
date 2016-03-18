@@ -16,6 +16,7 @@ class Topic < ActiveRecord::Base
   has_many :reviews, through: :conversations
 
 
+
   #topic's average rating by all users
   def average_rating
     if self.reviews.count != 0

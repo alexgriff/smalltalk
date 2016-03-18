@@ -1,6 +1,12 @@
 <ul>
-<% Topic.all.each do |topic| %>
+
+<% sorted_topics = Topic.all.sort_by { |t| current_user.average_rating_for_topic(t) }.reverse %>
+
+
+<% sorted_topics.each do |topic| %>
   <li><%= link_to topic.name, topic_path(topic) %> -
-      <%= current_user.test(topic) %> stars </li>
+      <%= current_user.average_rating_for_topic(topic) %> stars  
+      <%= "(You haven't had any conversations about this topic, try it out or continue avoiding it!)" if current_user.average_rating_for_topic(topic) == 0 %>
+      </li>
 <% end %>
 </ul>
