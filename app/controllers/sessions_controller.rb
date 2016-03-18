@@ -12,7 +12,6 @@ class SessionsController < ApplicationController
       flash.now.alert = "Email or password is invalid"
       render :new
     end
-      redirect_to user, notice: "Logged In" 
   end
 
   def destroy

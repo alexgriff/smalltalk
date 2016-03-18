@@ -60,9 +60,9 @@ class User < ActiveRecord::Base
     count_hash
   end
 
-  # def number_of_conversations_about(topic)
-  #   self.conversations.where(topic: topic).count
-  # end
+  def number_of_conversations_about(topic)
+    self.conversations.where(topic: topic).count
+  end
 
   def number_of_conversations_with(partner)
     self.conversations.where(partner: partner).count
@@ -94,9 +94,44 @@ class User < ActiveRecord::Base
   def topic_count_for(topic)
     ((topic_count(topic).to_f/self.conversations.size) * 100).round(2)
   end
-
   
 
+
+  # user's average rating of the given topic 
+  def ave_rating(topic)
+     reviews = self.reviews.select do |review| review.conversation.topics.include?(topic)
+     end
+     topic_ratings = reviews.map do |review| review.rating end   
+      topic_ratings.sum.to_f / topic_ratings.size
+  end  
+
+  #returns user's reviews with rating >= 4
+  def high_rated_reviews
+    self.reviews.high_ratings
+  end
+  
+  #returns array of most frequent conversation partners
+  def most_frequent_convo_partners 
+    partners = self.partner_ids 
+    partners_with_most_frequency = partners.group_by{|x| partners.count(x)}.sort.last 
+    frequency = partners_with_most_frequency.first
+    partners_with_most_frequency.last.uniq.map do |id| Partner.find(id) end  
+  end  
+
+  #returns converesations that the user had this month
+  def conversation_this_month
+    self.conversations.this_month
+  end
+  
+  #conversations with high rating 
+  def conversations_with_high_rating
+   self.conversations.high_ratings
+  end 
+  
+  #conversation with low_rating
+  def conversations_with_low_rating
+    self.conversations_with_low_rating
+  end
 
   def array_of_ratings_by_user
     self.reviews.map do |review|
@@ -114,12 +149,9 @@ class User < ActiveRecord::Base
     else
       0
     end
+
   end 
-
-   
-
- 
-
- 
+  
 
 end
+

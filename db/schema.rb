@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317175221) do
+ActiveRecord::Schema.define(version: 20160318144928) do
 
   create_table "conversation_topics", force: :cascade do |t|
     t.integer  "conversation_id"
@@ -54,11 +54,10 @@ ActiveRecord::Schema.define(version: 20160317175221) do
     t.string   "name"
     t.integer  "awkwardness"
     t.string   "fun_fact"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "email"
     t.string   "password_digest"
-    t.string   "password_confirmation"
   end
 
 end

@@ -19,10 +19,7 @@ FactoryGirl.define do
     awkwardness { Faker::Number.between(1,10)}
     fun_fact { Faker::Hipster.word }
     sequence(:email) { |n| "first_name#{n}@idk.com".downcase }
-    password_digest { "123" }
-    
-    
-    after(:create)  { |user| user.password_confirmation="123" }
+    password { "123" }
   end
   
 end
