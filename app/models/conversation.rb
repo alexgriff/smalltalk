@@ -18,6 +18,9 @@ class Conversation < ActiveRecord::Base
   has_many :topics, through: :conversation_topics
   accepts_nested_attributes_for :review
 
+  validates :time, presence: {message: "Must provide a date for the convo"}
+  validates :review, presence: {message: "Must provide a rating for the convo"}
+
   
 
 

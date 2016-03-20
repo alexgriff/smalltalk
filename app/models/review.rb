@@ -12,6 +12,7 @@
 
 class Review < ActiveRecord::Base
   belongs_to :conversation 
+  validates :rating, presence: true
 
   def review_message
     one_star = ["This conversation will haunt your dreams", "Oh dear.", "Ugh.", "You are very traumatized"]

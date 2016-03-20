@@ -1,3 +1,10 @@
+<% if @conversation.errors.full_messages.any? %>
+  <% @conversation.errors.full_messages.each do |error_message| %>
+    <p id="error"><%= error_message %></p>
+  <% end %>
+<% end %>
+
+
 
 <%= form_for @conversation do |f| %>
   <%= f.label 'Select or Create Your Conversation Partner' %></br>

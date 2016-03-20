@@ -18,8 +18,12 @@ class ConversationsController < ApplicationController
       @conversation.associate_or_create_partner_by_name(params[:partner_name])
     end
 
-    @conversation.save
-    redirect_to conversation_path(@conversation)
+    if @conversation.save
+      redirect_to conversation_path(@conversation)
+    else
+      @review = @conversation.build_review
+      render 'new'
+    end
 
   end
 
