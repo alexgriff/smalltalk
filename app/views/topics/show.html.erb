@@ -29,7 +29,7 @@
 <p>Conversations that included <span><%= @topic.name %></span> </p>
 
 <ul>
-<% current_user.conversations_about_topic(@topic).each do |convo| %>
+<% current_user.all_conversations_about(@topic).each do |convo| %>
 <li> <%= link_to "#{convo.time.strftime("%a, %B %d, %Y")} with #{convo.partner.name}", conversation_path(convo) %> </li>
 <% end %> 
 </ul>

@@ -3,9 +3,8 @@
 <% sorted_partners = current_user.partners.uniq.sort_by { |p| current_user.average_rating(p) }.reverse %>
 <ul>
 <% sorted_partners.each do |partner| %>
-  <li><%= link_to partner.name, partner_path(partner)%> - ave.
-      <%= current_user.average_rating(partner) %> stars
-      of  <%= pluralize(current_user.number_of_conversations_with(partner), "small talk") %> 
+  <li>
+    <%= link_to partner.name, partner_path(partner)%> - <%= current_user.average_rating(partner)%> stars
   </li>
 <% end %>
 </ul>

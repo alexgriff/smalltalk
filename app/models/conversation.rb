@@ -13,7 +13,7 @@
 class Conversation < ActiveRecord::Base
   belongs_to :user
   belongs_to :partner
-  has_one :review, dependent: :destroy 
+  has_one :review, dependent: :destroy
   has_many :conversation_topics
   has_many :topics, through: :conversation_topics
   accepts_nested_attributes_for :review
@@ -65,10 +65,5 @@ class Conversation < ActiveRecord::Base
      |id| Topic.find(id) end.uniq 
    end 
 
-   #list of conversations associated with the given topic
-  def self.list_of_conversations(topic)
-     ConversationTopic.where(topic: topic).map(&:conversation_id).map do 
-     |x| Conversation.find(x) end 
-  end 
-  
+ 
 end

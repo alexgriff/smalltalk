@@ -74,7 +74,9 @@ class User < ActiveRecord::Base
 
 
   def partner_highest_rating
-     self.partners.max_by {|partner| self.average_rating(partner)}
+    if self.conversations.present?
+      self.partners.max_by {|partner| self.average_rating(partner)}
+    end
   end 
 
   
@@ -100,11 +102,8 @@ class User < ActiveRecord::Base
 
 
  
-
-  def all_partners_with(topic)
-    self.conversations.joins(:topics).where(topics: {id: topic.id}).map do |convo|
-     convo.partner
-   end.flatten.uniq
+  def all_conversations_about(topic)
+    self.conversations.joins(:topics).where(topics: {id: topic.id})
   end
 
 
@@ -113,10 +112,7 @@ class User < ActiveRecord::Base
     self.reviews.high_ratings
   end
   
-  #user's conversations associated with the given topic
-  def conversations_about_topic(topic)
-    Conversation.list_of_conversations(topic)&self.conversations
-  end 
+ def 
   
 
   #returns array of most frequent conversation partners
@@ -134,7 +130,9 @@ class User < ActiveRecord::Base
   
   #conversations with high rating >=4
   def conversations_with_high_rating
-   self.conversations.high_ratings
+    if self.conversations.present?
+      self.conversations.high_ratings
+    end
   end 
   
   #conversation with low_rating =< 1
@@ -163,12 +161,16 @@ class User < ActiveRecord::Base
    
     # most successful conversation topic   
   def highest_rated_topic
-     self.topics.max_by{|topic| self.average_rating_for_topic(topic)} 
+    if self.conversations.present?
+      self.topics.max_by{|topic| self.average_rating_for_topic(topic)} 
+    end
   end 
  
   # least succesful conversation topic   
   def lowest_rated_topic
+    if self.conversations.present?
       self.topics.min_by{|topic| self.average_rating_for_topic(topic)}
+    end
   end  
 
   def all_partners_with(topic)

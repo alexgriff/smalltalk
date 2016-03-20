@@ -9,21 +9,31 @@ Your Awkwardness level: <%= current_user.awkwardness %></br></br>
 <%= link_to "Check out your previous conversations", conversations_path %>  </br></br>
 
 <h2>Your Top 5 Conversations</h2>  
-<ul>
-<% current_user.conversations_with_high_rating.order('time DESC').first(5).each do |conversation| %>
-  <li> <%= link_to "#{conversation.time.strftime("%a, %B %d, %Y")} | #{conversation.partner.name} | #{conversation.topics.pluck(:name).join} | #{conversation.review.rating}", conversation_path(conversation)  %>
-  </li>
-<% end %> 
-</ul>
+
+<% if current_user.conversations.present? %>
+  <ul>
+
+    <!-- current_user.conversations.sort_by { |convo| convo.review.rating }.first(5) -->
+    <% current_user.conversations.joins(:review).order('reviews.rating DESC', 'time DESC').limit(5).each do |conversation| %>
+      
+      <li> <%= link_to "#{conversation.time.strftime("%a, %B %d, %Y")} | #{conversation.partner.name} | #{    conversation.topics.pluck(:name).join} | #{conversation.review.rating}", conversation_path(   conversation)  %>
+      </li>
+
+    <% end %> 
+  <ul>
+<% else %>
+  <p><span>No conversations to show</span></p>
+  <p>Go out and SmallTalk and add some conversations</p>
+<% end %>
 
 <h2>Topic</h2>
 <% high_topic = current_user.highest_rated_topic %>
 <% low_topic = current_user.lowest_rated_topic%>
-<p> Your Favorite Topic overall: <%= link_to high_topic.name, topic_path(high_topic) %> </p> 
-<p> Your Least Favorite Topic overall: <%= link_to low_topic.name, topic_path(low_topic) %> </p>
+<p> Your Favorite Topic overall: <%= link_to(high_topic.name, topic_path(high_topic)) unless high_topic.nil? %> </p> 
+<p> Your Least Favorite Topic overall: <%= link_to(low_topic.name, topic_path(low_topic)) unless low_topic.nil? %> </p>
 <% topic = current_user.highest_rated_topic %>
 <% fav= current_user.partner_highest_rating %> 
-<p>Your conversations with <%= link_to fav.name, partner_path(fav) %> are the highest rated overall!
+<p>Your conversations with <%= link_to(fav.name, partner_path(fav)) unless fav.nil? %> are the highest rated overall!
 </p>
 
 <%= link_to "See All Topics",  topics_path %></br>
