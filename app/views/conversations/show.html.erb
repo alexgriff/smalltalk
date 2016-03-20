@@ -12,6 +12,9 @@ You chatted about
 </ul>
 
 You rated it <%= @conversation.review.rating %> out of 5.</br>
+ <%if @conversation.review.rating == 1 %>  
+ <input type="button" onclick="alert('This conversation never happened!!')" value="Forget about it!" >
+ <%end%>
 <%= @conversation.review.review_message %>
 
 
