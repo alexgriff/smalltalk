@@ -146,7 +146,6 @@ class User < ActiveRecord::Base
   def rating_list
    self.reviews.pluck(:rating)
   end 
-  
 
   #average rating of the given topic by the user
   def average_rating_for_topic(topic)
@@ -184,8 +183,6 @@ class User < ActiveRecord::Base
       self.topics.min_by{|topic| self.average_rating_for_topic(topic)}
   end  
 
-
-  
   def all_partners_with(topic)
     self.conversations.joins(:topics).where(topics: {id: topic.id}).map do |convo|
      convo.partner
