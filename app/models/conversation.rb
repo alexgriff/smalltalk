@@ -20,7 +20,7 @@ class Conversation < ActiveRecord::Base
 
   validates :time, presence: {message: " : Must provide a date for the convo"}
   validates :review, presence: {message: " : Must provide a rating for the convo"}
-
+  validates :topics, presence: {message: " : A convo must have atleast 1 Topic, otherwise it's not really a convo"}
   
 
 
