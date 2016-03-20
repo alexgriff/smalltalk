@@ -18,8 +18,9 @@ class Topic < ActiveRecord::Base
   #topic's average rating by all users
   def average_rating
     if self.reviews.count != 0
-    self.reviews.pluck(:rating).sum / self.reviews.count
-    else 0 
+      ((self.reviews.pluck(:rating).sum).to_f / self.reviews.count).round(2)
+    else 
+      0 
     end 
   end
 
