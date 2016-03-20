@@ -22,7 +22,7 @@
 <ul>
 <% current_user.conversations.where(partner: @partner).each do |conversation| %>
  <li>
- <%= link_to "#{conversation.time.strftime("%a, %B %d, %Y")} | #{conversation.partner.name} | #{conversation.topics.pluck(:name).join} | #{conversation.review.rating}"  %>
+ <%= link_to "#{conversation.time.strftime("%a, %B %d, %Y")} | #{conversation.partner.name} | #{conversation.topics.pluck(:name).join} | #{conversation.review.rating}", conversation_path(conversation)  %>
  </li>
  <% end %>  </ul> </p></br></br>
 
