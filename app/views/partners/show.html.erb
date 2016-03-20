@@ -21,11 +21,9 @@
 <p>Conversations with <%= @partner.name %> </p>
 <ul>
 <% current_user.conversations.where(partner: @partner).each do |conversation| %>
- <li><%= link_to (conversation) do %> 
- <%= conversation.time.to_date %> 
- <%= conversation.topics.pluck(:name).join %> 
- <%= conversation.review.rating %> 
- <% end %> </li>
+ <li>
+ <%= link_to "#{conversation.time.strftime("%a, %B %d, %Y")} | #{conversation.partner.name} | #{conversation.topics.pluck(:name).join} | #{conversation.review.rating}"  %>
+ </li>
  <% end %>  </ul> </p></br></br>
 
 
