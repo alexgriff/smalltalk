@@ -98,6 +98,27 @@ class User < ActiveRecord::Base
     ((topic_count(topic).to_f/self.conversations.size) * 100).round(2)
   end
 
+
+   #average rating of the given topic by the user
+  def average_rating_for_topic(topic)
+    reviews_with_given_topic = self.reviews.select do |review| 
+      review.conversation.topics.include?(topic)
+     end
+    if reviews_with_given_topic.present?
+      ratings = reviews_with_given_topic.map { |review| review.rating } 
+      (ratings.sum.to_f / ratings.size).round(2)
+    else
+      0
+    end
+  end 
+
+  def all_partners_with(topic)
+    self.conversations.joins(:topics).where(topics: {id: topic.id}).map do |convo|
+     convo.partner
+   end.flatten.uniq
+  end
+
+
   #returns user's reviews with rating >= 4
   def high_rated_reviews
     self.reviews.high_ratings
@@ -137,6 +158,7 @@ class User < ActiveRecord::Base
    self.reviews.pluck(:rating)
   end 
   
+
   #average rating of the given topic by the user
   def average_rating_for_topic(topic)
     reviews_with_given_topic = self.reviews.select do |review| 
@@ -167,6 +189,7 @@ class User < ActiveRecord::Base
      convo.partner
    end.flatten.uniq
   end
+
 
 end
 
