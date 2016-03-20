@@ -77,13 +77,7 @@ class User < ActiveRecord::Base
      self.partners.max_by {|partner| self.average_rating(partner)}
   end 
 
-  def most_frequent_convo_partners
-  end  
-
-  # def partner_highest_rating(topic)
-
-    
-  # end
+  
 
 ###### Topic Methods #######
   def topic_count(topic)
