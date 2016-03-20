@@ -151,28 +151,16 @@ class User < ActiveRecord::Base
   #average rating of the given topic by the user
   def average_rating_for_topic(topic)
     total = self.conversations.joins(:topics).where(topics: {id: topic.id}).count
-    
-    if total = 0
+    if total == 0
       0
     else
       ratings = self.conversations.joins(:topics).where(topics: {id: topic.id}).map do |convo|
         convo.review.rating
       end
-    ((ratings.sum).to_f / total).round(2)
+    avg =((ratings.sum).to_f / total).round(2)
     end
   end
 
-
-
-    # reviews_with_given_topic = self.reviews.select do |review| 
-    #   review.conversation.topics.include?(topic)
-    #  end
-    # if reviews_with_given_topic.present?
-    #   ratings = reviews_with_given_topic.map { |review| review.rating } 
-    #   (ratings.sum.to_f / ratings.size).round(2)
-    # else
-    #   0
-    # end
    
     # most successful conversation topic   
   def highest_rated_topic
