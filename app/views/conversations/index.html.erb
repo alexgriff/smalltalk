@@ -5,6 +5,8 @@
 </p>
 </div>
 
+</br>
+<font size="3" color="blue" strong><%= flash[:notice] %></font>
 <h3> Conversations sorted by most recent </h3>
 <ul>
 <% sorted_convos = current_user.conversations.sort_by { |convo| convo.time }.reverse  %>

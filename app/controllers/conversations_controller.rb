@@ -29,8 +29,14 @@ class ConversationsController < ApplicationController
   def update
     if @conversation.review.update(comment: params[:review_comment])
       flash[:notice] = "Comment was successfully created!"
-    redirect_to @conversation
+      redirect_to @conversation
     end 
+  end
+
+  def destroy
+    @conversation.destroy
+    flash[:notice] = "~~Poof~~ You have forgotten a conversation, it never happened!"
+    redirect_to @conversation
   end
 
   private
