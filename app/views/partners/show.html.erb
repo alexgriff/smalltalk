@@ -1,7 +1,15 @@
 <div class="showpage">
 <h3><%= @partner.name %></h3>
 <p>You have had <span><%= pluralize(current_user.number_of_conversations_with(@partner), 'conversation')%></span> with <span><%= @partner.name %></span></p>
-<p>You have discussed 
+
+<% topic = current_user.most_frequent_topic_with(@partner).name %>
+<p> <span><%= current_user.topic_percentage_for_partner(@partner,topic) %>%</span> of your conversations with <span><%= @partner.name %></span> involved <span><%= topic %></span> making it your most chatted about topic with this conversation partner! </p> 
+  
+<p>Your average conversation with them was rated: <span><%= current_user.average_rating(@partner) %> stars</span></p>
+
+</br>
+
+<p>Topics you have discussed are:
   <ul>
   <% current_user.unique_topics_with(@partner).each do |topic| %> 
     <li><%= link_to topic.name, topic_path(topic) %></li>
@@ -9,34 +17,22 @@
   </p>
   </ul>
 
-<% topic = current_user.most_frequent_topic_with(@partner).name %>
-
-
-<p> <%= current_user.topic_percentage_for_partner(@partner,topic) %>% of your conversations with <%= @partner.name %> involved <%= topic %> making it your most chatted about topic with this conversation partner! </p> 
-
-
-<p>Your average conversation was rated: <%= current_user.average_rating(@partner) %> stars</p>
 
 <p>Conversations with <%= @partner.name %> </p>
+<ul>
 <% current_user.conversations.where(partner: @partner).each do |conversation| %>
- <p><%= link_to (conversation) do %> 
+ <li><%= link_to (conversation) do %> 
  <%= conversation.time.to_date %> 
  <%= conversation.topics.pluck(:name).join %> 
  <%= conversation.review.rating %> 
- <% end %> </p>
- <% end %> 
-
-
-<p> <span><%= current_user.topic_percentage_for_partner(@partner,topic) %>%</span> of your conversations with <span><%= @partner.name %></span> involved <span><%= topic %></span> making it your most chatted about topic with this conversation partner! </p> 
-  
-<p>Your average conversation with them was rated: <span><%= current_user.average_rating(@partner) %> stars</span></p>
-
-</br>
+ <% end %> </li>
+ <% end %>  </ul> </p></br></br>
 
 
 
-<%= link_to "see all of your conversation partners",  partners_path %></br></br>
-<%= link_to "Back to my homepage", user_path(current_user) %>
+
+<%= link_to "see all of your conversation partners",  partners_path %></br>
+<%= link_to "back to my homepage", user_path(current_user) %>
   
 
 

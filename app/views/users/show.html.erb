@@ -3,9 +3,9 @@
 <br>
 
 Hi <%= current_user.name %>! </br></br>
-Your Awkwardness level: <%= current_user.awkwardness %> </br>
+Your Awkwardness level: <%= current_user.awkwardness %></br></br>
 
-<%= link_to "Create a conversation", new_conversation_path  %> </br></br>
+<%= link_to "Create a conversation", new_conversation_path  %> </br>
 <%= link_to "Review your conversation", conversations_path %>  </br></br>
 
 <h2>Your Top 5 Conversations</h2>  
@@ -15,19 +15,22 @@ Your Awkwardness level: <%= current_user.awkwardness %> </br>
   </li>
 <% end %> 
 </ul>
+
 <h2>Topic</h2>
 <% high_topic = current_user.highest_rated_topic %>
 <% low_topic = current_user.lowest_rated_topic%>
 <p> Your Favorite Topic over all: <%= link_to high_topic.name, topic_path(high_topic) %> </p> 
 <p> Your Least Favorite Topic: <%= link_to low_topic.name, topic_path(low_topic) %> </p>
- 
-
-<h2>Partner</h2>
-
+<% topic = current_user.highest_rated_topic %>
+<h2> Your High_Rated Topic: <%= link_to topic.name, topic_path(topic) %> </h2> 
+<h2> Your least favorite topic: <%= current_user.lowest_rated_topic.name %> </h2>
 <% fav= current_user.partner_highest_rating %> 
-<p><%= link_to fav.name, partner_path(fav) %> has highest rating on the conversation review</p>
+<h2><%= link_to fav.name, partner_path(fav) %> has highest rating on the conversation review</h2>
 <p>
 
+<%= link_to "See All Topics",  topics_path %></br>
+<%= link_to 'See All conversations', conversations_path %></br>
+<%= link_to "see all of your conversation partners",  partners_path %></br></br>
 
 
 
