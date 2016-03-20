@@ -10,7 +10,7 @@ Hi <%= current_user.name %>! </br></br>
 <h2>Your Top 5 Conversations</h2>
 
 <% current_user.conversations_with_high_rating.order('time DESC').first(5).each do |conversation| %>
-<p><%= conversation.time.to_date %> | 
+<p><%= conversation.time.strftime("%a, %B %d, %Y") %> | 
 <%= Partner.find(conversation.partner_id).name %> |
 <%= conversation.topics.pluck(:name).join %> |
 <%= conversation.review.rating %> 

@@ -1,5 +1,8 @@
-<h4>Your Conversation with <%= link_to @conversation.partner.name, partner_path(@conversation.partner) %> </h4>
-at <%= "#{@conversation.time}" %>. 
+
+<h4>Your Conversation with <%= link_to @conversation.partner.name, partner_path(@conversation.partner) %>
+</h4>
+<h5>on <%= @conversation.time.strftime("%a, %B %d, %Y") %></h5>
+</br>
 
 You chatted about 
 <ul>

@@ -7,11 +7,13 @@ class ConversationsController < ApplicationController
   end
 
   def create
-    # params = {"conversation"=>{"partner_id"=>"1", "topic_ids"=>["1", "2"], "review_attributes"=>{"rating"=>"4"}},
+    # params = {"conversation"=>{"partner_id"=>"1", "time"=>"03-18-2016", topic_ids"=>["1", "2"], "review_attributes"=>{"rating"=>"4"}},
     # "partner_name"=>"Dude" }
+    params[:conversation][:time] = format_time
     
     @conversation = current_user.conversations.build(conversation_params)
-   
+
+    
     if params[:partner_name].present?
       @conversation.associate_or_create_partner_by_name(params[:partner_name])
     end
@@ -32,6 +34,14 @@ class ConversationsController < ApplicationController
   end
 
   private
+
+  # changes params from "03-18-2016" to "2016-03-18"
+  # so you can call Date.parse(string-from-params)
+  def format_time
+    date_string = params[:conversation][:time]
+    date_array = date_string.split('-')
+    date = "#{date_array.pop}-#{date_array.join('-')}"
+  end
 
   def conversation_params
     params.require(:conversation).permit(:partner_id, :time, :topic_ids => [], :review_attributes =>[:rating])
