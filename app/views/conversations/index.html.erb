@@ -4,12 +4,12 @@
 <% end %>
 </p>
 </div>
-<!-- Time: ( bootstrap calendar? ) -->
+
 <h3> Conversations sorted by most recent </h3>
 <ul>
 <% sorted_convos = current_user.conversations.sort_by { |convo| convo.time }.reverse  %>
 <% sorted_convos.each do |convo| %>
-  <li> <%= link_to "#{convo.time.to_date} - #{convo.partner.name} - #{convo.review.rating}", conversation_path(convo) %> </li>
+  <li> <%= link_to "#{convo.time.strftime("%a, %B %d, %Y")} - #{convo.partner.name} - #{convo.review.rating}", conversation_path(convo) %> </li>
 <% end %>
 </ul>
 <%= link_to "Back to my homepage", user_path(current_user) %>

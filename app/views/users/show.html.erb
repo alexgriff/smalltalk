@@ -9,18 +9,17 @@ Your Awkwardness level: <%= current_user.awkwardness %> </br>
 <%= link_to "Review your conversation", conversations_path %>  </br></br>
 
 <h2>Your Top 5 Conversations</h2>  
+<ul>
 <% current_user.conversations_with_high_rating.order('time DESC').first(5).each do |conversation| %>
-<p><%= link_to (conversation) do %>
-<%= conversation.time.to_date %> | 
-<%= Partner.find(conversation.partner_id).name %> |
-<%= conversation.topics.pluck(:name).join %> |
-<%= conversation.review.rating %>
-<% end %>  
+  <li> <%= link_to "#{conversation.time.strftime("%a, %B %d, %Y")} | #{conversation.partner.name} | #{conversation.topics.pluck(:name).join} | #{conversation.review.rating}"  %>
+  </li>
 <% end %> 
+</ul>
 <h2>Topic</h2>
-<% topic = current_user.highest_rated_topic %>
-<p> Your Favorite Topic over all: <%= link_to topic.name, topic_path(topic) %> </p> 
-<p> Your least favorite topic: <%= current_user.lowest_rated_topic.name %> </p>
+<% high_topic = current_user.highest_rated_topic %>
+<% low_topic = current_user.lowest_rated_topic%>
+<p> Your Favorite Topic over all: <%= link_to high_topic.name, topic_path(high_topic) %> </p> 
+<p> Your Least Favorite Topic: <%= link_to low_topic.name, topic_path(low_topic) %> </p>
  
 
 <h2>Partner</h2>

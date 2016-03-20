@@ -1,14 +1,5 @@
+<h2>Your Ratings for <%= @topic.name %></h2>
 
-<h1>Our Stats</h1>
-<h3><%= @topic.name %></h3> Rating: <%= pluralize(@topic.average_rating, "star") %>  on average by our users.</br>
-appeared <%= @topic.percentage %>% of total conversations. 
-
-
-<h1>Your Ratings</h1>
-
-<p>You have had <%= pluralize(current_user.topic_count(@topic), "conversation") %> about <%= @topic.name %>.</p>
-
-<h3><%= @topic.name %></h3>
 <p>You have had <span><%= pluralize(current_user.topic_count(@topic), "conversation") %></span> about <span><%= @topic.name %></span></p>
 
 
@@ -31,13 +22,17 @@ appeared <%= @topic.percentage %>% of total conversations.
 
 
 
-<p>Conversation List involoved in this topic </p>
+<p>Conversations that included <span><%= @topic.name %></span> </p>
 <ul>
 <% current_user.conversations_about_topic(@topic).each do |convo| %>
-<li> <%= link_to convo.time.to_date, conversation_path(convo) %> </li>
+<li> <%= link_to "#{convo.time.strftime("%a, %B %d, %Y")} with #{convo.partner.name}", conversation_path(convo) %> </li>
 <% end %> 
 </ul>
 </br>
+
+<h2>Our Overall Stats for <%= @topic.name %> </h2>
+<p><span><%= @topic.name %></span> was rated <span><%= pluralize(@topic.average_rating, "star") %></span>  on average by our users</br>
+ and it appeared in <span><%= @topic.percentage %>%</span> of total conversations.</p>
 
 <%= link_to "All Topics",  topics_path %></br></br>
 <%= link_to "Back to my my homepage", user_path(current_user) %>
