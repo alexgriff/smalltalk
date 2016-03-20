@@ -3,28 +3,30 @@
 <br>
 
 Hi <%= current_user.name %>! </br></br>
+Your Awkwardness level: <%= current_user.awkwardness %> </br>
 
 <%= link_to "Create a conversation", new_conversation_path  %> </br></br>
 <%= link_to "Review your conversation", conversations_path %>  </br></br>
 
-<h2>Your Top 5 Conversations</h2>
-
+<h2>Your Top 5 Conversations</h2>  
 <% current_user.conversations_with_high_rating.order('time DESC').first(5).each do |conversation| %>
-<p><%= conversation.time.to_date %> | 
+<p><%= link_to (conversation) do %>
+<%= conversation.time.to_date %> | 
 <%= Partner.find(conversation.partner_id).name %> |
 <%= conversation.topics.pluck(:name).join %> |
-<%= conversation.review.rating %> 
-</p>
-<% end %>
+<%= conversation.review.rating %>
+<% end %>  
+<% end %> 
+<h2>Topic</h2>
+<% topic = current_user.highest_rated_topic %>
+<p> Your Favorite Topic over all: <%= link_to topic.name, topic_path(topic) %> </p> 
+<p> Your least favorite topic: <%= current_user.lowest_rated_topic.name %> </p>
+ 
 
-<h2>Your Favorite Conversation Topic</h2>
-<% topic = current_user.topics.highest_rated %>
-<%= topic.name %> |
+<h2>Partner</h2>
 
-
-
-
-
-
+<% fav= current_user.partner_highest_rating %> 
+<p><%= link_to fav.name, partner_path(fav) %> has highest rating on the conversation review</p>
+<p>
 
 

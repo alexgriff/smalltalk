@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
     end.flatten
   end
 
+ 
   def most_frequent_topic_with(partner)
     count_hash = topic_count_with(partner)
     name = count_hash.key(count_hash.values.max)
@@ -71,6 +72,19 @@ class User < ActiveRecord::Base
     (all_ratings.sum.to_f/all_ratings.count).round(2)
   end
 
+
+  def partner_highest_rating
+     self.partners.max_by {|partner| self.average_rating(partner)}
+  end 
+
+  def most_frequent_convo_partners
+  end  
+
+  # def partner_highest_rating(topic)
+
+    
+  # end
+
 ###### Topic Methods #######
   def topic_count(topic)
       self.topics.where(id: topic.id).count
@@ -85,24 +99,22 @@ class User < ActiveRecord::Base
     count_hash
   end
 
+
   def topic_count_for(topic)
     ((topic_count(topic).to_f/self.conversations.size) * 100).round(2)
   end
-<<<<<<< HEAD
-   
 
-=======
-  
->>>>>>> friday
   #returns user's reviews with rating >= 4
   def high_rated_reviews
     self.reviews.high_ratings
   end
-
- # def number_of_conversations_about(topic)
- #    self.conversations.where(topic: topic).count
- #  end
   
+  #user's conversations associated with the given topic
+  def conversations_about_topic(topic)
+    Conversation.list_of_conversations(topic)&self.conversations
+  end 
+  
+
   #returns array of most frequent conversation partners
   def most_frequent_convo_partners 
     partners = self.partner_ids 
@@ -130,17 +142,6 @@ class User < ActiveRecord::Base
   def rating_list
    self.reviews.pluck(:rating)
   end 
-
-  #highest rated topic by the user
-  def highest_rated_topic
-    self.topics.highest_rated
-  end 
-  
-  #lowest rated topic by the user 
-  def lowest_rated_topic 
-    self.topics.lowest_rated
-  end 
-
   
   #average rating of the given topic by the user
   def average_rating_for_topic(topic)
@@ -154,18 +155,24 @@ class User < ActiveRecord::Base
       0
     end
   end 
+   
+    # most successful conversation topic   
+  def highest_rated_topic
+     self.topics.max_by{|topic| self.average_rating_for_topic(topic)} 
+  end 
+ 
+  # least succesful conversation topic   
+  def lowest_rated_topic
+      self.topics.min_by{|topic| self.average_rating_for_topic(topic)}
+  end  
 
+
+  
   def all_partners_with(topic)
     self.conversations.joins(:topics).where(topics: {id: topic.id}).map do |convo|
      convo.partner
    end.flatten.uniq
   end
 
-  # def all_topics_with(partner)
-  #   self.conversations.where(partner: partner).map do |convo|
-  #     convo.topics
-  #   end.flatten
-  # end
-  
 end
 

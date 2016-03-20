@@ -29,13 +29,22 @@ class Partner < ActiveRecord::Base
 
 #female partners of the conversation list 
  def self.female
-  self.all.group_by {|partner| partner.gender}.fetch("F")   
+  where(gender: "F")  
  end 
 
 #male partners of the conversation list 
  def self.male
-  self.all.group_by {|partner| partner.gender}.fetch("M")
+  where(gender: "M")
  end 
+
+ def most_frequent_topic
+   self.topics.most_frequent
+ end  
+
+ def highest_rated_topic
+    self.reviews.max_by {|topic| topic.average_rating} 
+ end 
+ 
 
 end
 

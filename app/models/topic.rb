@@ -14,7 +14,7 @@ class Topic < ActiveRecord::Base
   has_many :users, through: :conversations
   has_many :partners, through: :conversations 
   has_many :reviews, through: :conversations
-
+  
   #topic's average rating by all users
   def average_rating
     if self.reviews.count != 0
@@ -27,20 +27,25 @@ class Topic < ActiveRecord::Base
   def conversation_count 
      self.conversations.count 
   end   
+  
+  #percentage of the appearance 
+  def percentage
+    ((self.conversation_count.to_f/Conversation.count)*100).round(2) 
+  end 
 
   # most frequent topic by all users
   def self.most_frequent
       self.all.max_by {|topic| topic.conversation_count}
   end 
-  
-  # least succesful conversation topic   
-  def self.lowest_rated
-      self.all.min_by {|topic| topic.average_rating}
-  end  
 
-  # most successful conversation topic   
-  def self.highest_rated
-     self.all.max_by {|topic| topic.average_rating}
-  end  
+  # highest rated topic by all users
+  def self.highest_rating
+   self.all.max_by {|topic| topic.average_rating} 
+  end 
+
+  def self.lowest_rating
+    self.all.min_by {|topic| topic.average_rating}
+  end 
+  
 
 end

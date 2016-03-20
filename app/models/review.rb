@@ -14,11 +14,11 @@ class Review < ActiveRecord::Base
   belongs_to :conversation 
 
   def review_message
-    one_star = ["This conversation will haunt your dreams", "This was your worst day.", "It's not the end of the world.", "You are very traumatized"]
-    two_star = ["You are slightly traumatized"]
-    three_star = ["This conversation went okay"]
-    four_star = ["You were sort of interested, great job!"]
-    five_star = ["You're a star. You should be as social networker"]
+    one_star = ["This conversation will haunt your dreams", "Oh dear.", "Ugh.", "You are very traumatized", "Forget Button?"]
+    two_star = ["You are slightly traumatized", "It was average to poor"]
+    three_star = ["This conversation went okay", "Not so awkward"]
+    four_star = ["Coooooooool!", "YES!"]
+    five_star = ["Cheers to your awesomeness","You rocked that talk!", "Wow! Social Networker!", "What a great conversation!"] 
     case rating
       when 1 
         one_star.sample
@@ -41,5 +41,4 @@ class Review < ActiveRecord::Base
     where('rating <= 1')
   end   
 
-   
 end

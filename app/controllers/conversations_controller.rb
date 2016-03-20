@@ -34,7 +34,7 @@ class ConversationsController < ApplicationController
   private
 
   def conversation_params
-    params.require(:conversation).permit(:partner_id, :time, :topic_ids => [], :review_attributes =>[:rating])
+    params.require(:conversation).permit(:partner_id, :partners_gender, :time, :topic_ids => [], :review_attributes =>[:rating])
   end
 
   def find_conversation

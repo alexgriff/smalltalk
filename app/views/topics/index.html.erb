@@ -1,3 +1,16 @@
+<h1>Our Stats</h1>
+<% high = Topic.highest_rating %>
+<%= link_to high.name, topic_path(high)%> ( average: <%= high.average_rating %>  stars ) was the top rated small talk topic by our users. </br>
+
+<% low = Topic.lowest_rating %>
+<%= link_to low.name, topic_path(low)%> ( average: <%= low.average_rating %> stars ) was the lowest rated small talk topic by our users. </br>
+
+<% frequent = Topic.most_frequent %>
+<%= link_to frequent.name, topic_path(frequent) %> ( appears <%= frequent.percentage %> % of total conversation ) was the most frequently appearing small talk topic by our users. 
+
+
+
+<h1>Your rating</h1>
 <ul>
 
 <% sorted_topics = Topic.all.sort_by { |t| current_user.average_rating_for_topic(t) }.reverse %>

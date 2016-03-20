@@ -50,12 +50,23 @@ class Conversation < ActiveRecord::Base
   #Need to Test
   #conversation that the user had with male/female partner
   def self.with_male_partner
-    self.joins(:partner).merge(Partner.male)
+    where(partner: Partner.male)
   end 
   
   def self.with_female_partner
-    self.joins(:partner).merge(Partner.female)
+    where(partner: Partner.female)
   end 
+   
+   #Topic of the converstions
+   def self.topics
+     ConversationTopic.where(conversation: self.all).pluck(:topic_id).map do 
+     |id| Topic.find(id) end.uniq 
+   end 
 
- 
+   #list of conversations associated with the given topic
+  def self.list_of_conversations(topic)
+     ConversationTopic.where(topic: topic).map(&:conversation_id).map do 
+     |x| Conversation.find(x) end 
+  end 
+  
 end

@@ -1,4 +1,10 @@
-<h3><%= @topic.name %></h3>
+<h1>Our Stats</h1>
+<h3><%= @topic.name %></h3> Rating: <%= pluralize(@topic.average_rating, "star") %>  on average by our users.</br>
+appeared <%= @topic.percentage %>% of total conversations. 
+
+
+<h1>Your Ratings</h1>
+
 <p>You have had <%= pluralize(current_user.topic_count(@topic), "conversation") %> about <%= @topic.name %>.</p>
 
 <p>In <%= current_user.topic_count_for(@topic).round(2) %> percent of your conversations, you talked about <%= @topic.name %>.</p>
@@ -18,6 +24,14 @@
   <% end %>
 </ul>
 
+
+
+<p>Conversation List involoved in this topic </p>
+<ul>
+<% current_user.conversations_about_topic(@topic).each do |convo| %>
+<li> <%= link_to convo.time.to_date, conversation_path(convo) %> </li>
+<% end %> 
+</ul>
 </br>
 
 <%= link_to "All Topics",  topics_path %></br></br>
