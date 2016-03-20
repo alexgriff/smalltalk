@@ -1,4 +1,4 @@
-<h1>Our Stats</h1>
+<h3>Topic</h3>
 <% high = Topic.highest_rating %>
 <%= link_to high.name, topic_path(high)%> ( average: <%= high.average_rating %>  stars ) was the top rated small talk topic by our users. </br>
 
@@ -10,7 +10,7 @@
 
 
 
-<h1>Your rating</h1>
+<p><%= current_user.name %>, you have reviewed, 
 <ul>
 
 <% sorted_topics = Topic.all.sort_by { |t| current_user.average_rating_for_topic(t) }.reverse %>
