@@ -2,10 +2,6 @@
 
 
 
-Rating: <span><%= pluralize(@topic.average_rating, "star") %></span>  on average by our users.</br>
-appeared <span><%= @topic.percentage %>%</span> of total conversations. 
-</br></br>
-
 <%= current_user.name %>,
 <p>You have had <span><%= pluralize(current_user.topic_count(@topic), "conversation") %></span> about <span><%= @topic.name %></span></p>
 
