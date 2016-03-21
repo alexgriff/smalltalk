@@ -10,27 +10,25 @@ f = File.open(config_path) or die "Unable to open file..."
 
 # 25 users, 25 conversations with 25 reviews, 25 partners
 25.times do
-  convo=FactoryGirl.create :conversation
+  convo=FactoryGirl.build :conversation
   
-  rand(1..3).times do
-    convo.topics << Topic.all.sample
-  end
+  
+  convo.topics << Topic.all.sample(rand(1..4))
   convo.save
 end
 
 
 # make each user have some more conversations
-5.times do
+10.times do
   
   User.all.each do |user|
     rand(0..9).times do
-      convo = Conversation.create(user: user, partner: Partner.all.sample)
+      convo = Conversation.new(user: user, partner: Partner.all.sample)
       convo.review = FactoryGirl.create :review
       convo.time = Faker::Time.between(1.month.ago, Time.now)
       
-      rand(1..3).times do
-        convo.topics << Topic.all.sample
-      end
+  
+      convo.topics << Topic.all.sample(rand(1..4))
       convo.save
     end
     user.save
