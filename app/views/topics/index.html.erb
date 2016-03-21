@@ -6,7 +6,10 @@
 
 <p><%= current_user.name %>, you have reviewed, 
 
+<% if current_user.topics.size != 0 %>
+
 <ul>
+
 
 <% sorted_topics = Topic.all.sort_by { |t| current_user.average_rating_for_topic(t) }.reverse %>
 
@@ -20,14 +23,16 @@
 </ul>
 
 <h2>Our Overall Topic Statistics</h2>
-<% high = Topic.highest_rating %>
-<%= link_to high.name, topic_path(high)%> ( average: <span><%= high.average_rating %>  stars</span> ) was the top rated SmallTalk topic by our users. </br>
+  <% high = Topic.highest_rating %>
+  <%= link_to high.name, topic_path(high)%> ( average: <span><%= high.average_rating %>  stars</span> ) was the top rated SmallTalk topic by our  users. </br>
+  
+  <% low = Topic.lowest_rating %>
+  <%= link_to low.name, topic_path(low)%> ( average: <span><%= low.average_rating %> stars</span>) was the lowest rated SmallTalk topic by our  users. </br>
+  
+  <% frequent = Topic.most_frequent %>
+  <%= link_to frequent.name, topic_path(frequent) %> ( appears <span><%= frequent.percentage %> %</span> of total conversation ) was the most   frequently appearing SmallTalk topic by our users. 
+  </br>
 
-<% low = Topic.lowest_rating %>
-<%= link_to low.name, topic_path(low)%> ( average: <span><%= low.average_rating %> stars</span>) was the lowest rated SmallTalk topic by our users. </br>
-
-<% frequent = Topic.most_frequent %>
-<%= link_to frequent.name, topic_path(frequent) %> ( appears <span><%= frequent.percentage %> %</span> of total conversation ) was the most frequently appearing SmallTalk topic by our users. 
-</br>
+<% end %>
 
 <%= link_to "Back to my homepage", user_path(current_user) %>

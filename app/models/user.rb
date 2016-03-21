@@ -219,8 +219,8 @@ class User < ActiveRecord::Base
       ratings = self.conversations.joins(:topics).where(topics: {id: topic.id}).map do |convo|
         convo.review.rating
       end
+      ((ratings.sum).to_f / total).round(2)
     end
-    ((ratings.sum).to_f / total).round(2)
   end
 
    
