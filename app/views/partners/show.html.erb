@@ -7,6 +7,20 @@
   
 <p>Your average conversation with them was rated: <span><%= current_user.average_rating(@partner) %> stars</span></p>
 
+<% high_stats = current_user.highest_rated_topic_with(@partner) %>
+<% successful_topic = high_stats.first %>
+<% successful_rating = high_stats.last %>
+
+<p>Your conversations with <span><%= @partner.name %></span> go most successfully when you talk about <span><%= successful_topic.name %></span>.  A conversation involving <span><%= successful_topic.name %></span> had an average rating of <span><%= successful_rating %></span>. This is a difference of <span>+<%= (successful_rating - current_user.average_rating(@partner)).round(2) %></span> points from your average conversation with <span><%= @partner.name %></span>. Try talking to them more about this topic or switch it up and see how that goes.. Goodluck! </p>
+
+<% low_stats = current_user.lowest_rated_topic_with(@partner) %>
+<% poor_topic = low_stats.first %>
+<% poor_rating = low_stats.last %>
+
+<% if successful_topic != poor_topic %>
+  <p>Your conversations with <span><%= @partner.name %></span> go most poorly when you talk about <span><%=  poor_topic.name %></span>.  A conversation involving <span><%= poor_topic.name %></span> had an average rating of <span><%= poor_rating %></span>. This is a difference of <span><%= (poor_rating -  current_user.average_rating(@partner)).round(2) %></span> points from your average conversation with <span><%= @partner.name %></span>. Avoid this topic with them or try it again to work on your conversation  skills.. Once again, Goodluck out there! </p>
+<% end %>
+  
 </br>
 
 <p>Topics you have discussed are:

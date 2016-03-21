@@ -19,7 +19,7 @@ end
 
 
 # make each user have some more conversations
-10.times do
+15.times do
   
   User.all.each do |user|
     rand(0..9).times do

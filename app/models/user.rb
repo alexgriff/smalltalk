@@ -79,6 +79,73 @@ class User < ActiveRecord::Base
     end
   end 
 
+   def highest_rated_topic_with(partner)
+      
+      # all the topics discussed in conversations that a specific partner was involved in
+      #
+      all_topics_with_partner = self.conversations.where(partner: partner).topics
+      
+      # will return a hash mapping ratings to a topic 
+      # i.e. { 2.5 => <Topic name:"Politics"..>, 1.7 => <Topic name:"Entertainment"..>, 
+      # 3.4 => <Topic name: "Random"..>, .. }
+      #
+      avg_rating_to_topic_map = 
+        all_topics_with_partner.each_with_object({}) do |topic, avg_map|
+          
+          convos_for_topic = topic.conversations.where(user: self, partner: partner)
+
+          topic_rating_avg = ((convos_for_topic.map(&:review).sum(&:rating)).to_f/convos_for_topic.size).round(2)
+
+          avg_map[topic_rating_avg] = topic
+      end
+
+      # find the max key
+      #
+      max_rating = avg_rating_to_topic_map.keys.max
+
+      # return both the rating and the value
+      # [<Topic name:"Friendship">, 4.6]
+      # so both can be accessed in the view
+      #
+      [avg_rating_to_topic_map[max_rating], max_rating]
+
+
+   end
+
+   def lowest_rated_topic_with(partner)
+      
+      # all the topics discussed in conversations that a specific partner was involved in
+      #
+      all_topics_with_partner = self.conversations.where(partner: partner).topics
+      
+      # will return a hash mapping ratings to a topic 
+      # i.e. { 2.5 => <Topic name:"Politics"..>, 1.7 => <Topic name:"Entertainment"..>, 
+      # 3.4 => <Topic name: "Random"..>, .. }
+      #
+      avg_rating_to_topic_map = 
+        all_topics_with_partner.each_with_object({}) do |topic, avg_map|
+          
+          convos_for_topic = topic.conversations.where(user: self, partner: partner)
+
+          topic_rating_avg = ((convos_for_topic.map(&:review).sum(&:rating)).to_f/convos_for_topic.size).round(2)
+
+          avg_map[topic_rating_avg] = topic
+      end
+
+      # find the max key
+      #
+      min_rating = avg_rating_to_topic_map.keys.min
+
+      # return both the rating and the value
+      # [<Topic name:"Friendship">, 4.6]
+      # so both can be accessed in the view
+      #
+      [avg_rating_to_topic_map[min_rating], min_rating]
+
+
+   end
+
+
   
 
 ###### Topic Methods #######
@@ -111,8 +178,6 @@ class User < ActiveRecord::Base
   def high_rated_reviews
     self.reviews.high_ratings
   end
-  
- def 
   
 
   #returns array of most frequent conversation partners
@@ -154,8 +219,8 @@ class User < ActiveRecord::Base
       ratings = self.conversations.joins(:topics).where(topics: {id: topic.id}).map do |convo|
         convo.review.rating
       end
-    avg =((ratings.sum).to_f / total).round(2)
     end
+    ((ratings.sum).to_f / total).round(2)
   end
 
    
