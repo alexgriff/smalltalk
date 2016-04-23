@@ -41,12 +41,13 @@ class Topic < ActiveRecord::Base
 
   # highest rated topic by all users
   def self.highest_rating
+    #select
    self.all.max_by {|topic| topic.average_rating} 
   end 
 
   def self.lowest_rating
     self.all.min_by {|topic| topic.average_rating}
-  end 
+  end
   
 
 end

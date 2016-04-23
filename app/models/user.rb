@@ -227,14 +227,14 @@ class User < ActiveRecord::Base
     # most successful conversation topic   
   def highest_rated_topic
     if self.conversations.present?
-      self.topics.max_by{|topic| self.average_rating_for_topic(topic)} 
+      self.topics.uniq.max_by{|topic| self.average_rating_for_topic(topic)} 
     end
   end 
  
   # least succesful conversation topic   
   def lowest_rated_topic
     if self.conversations.present?
-      self.topics.min_by{|topic| self.average_rating_for_topic(topic)}
+      self.topics.uniq.min_by{|topic| self.average_rating_for_topic(topic)}
     end
   end  
 
