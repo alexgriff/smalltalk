@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.2'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use postgresql as the database for Active Record
+gem 'pg'
 
 gem 'jquery-ui-rails'
 
@@ -30,7 +30,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-gem "times_wire", "~> 0.9.0"
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -39,15 +38,17 @@ gem "times_wire", "~> 0.9.0"
 # gem 'capistrano-rails', group: :development
 
 
+gem 'factory_girl_rails'
+gem 'faker'
+
 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'sqlite3'
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
-  gem 'faker'
 end
 
 group :development do
