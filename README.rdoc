@@ -1,37 +1,8 @@
-== README
+#SmallTalk
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ A Rails application to help people improve their smalltalk through conversational analysis.
 
-Things you may want to cover:
+ http://smalltalklog.herokuapp.com
 
-* Ruby version
+ Sign up or log in as a seed-user. Due to a mistake we came to love all seed-users have the email "first_nameXX@idk.com" where XX is a number between 1 and 25 and have the password "123".
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
-
-
-hello world
-
-
-
-THIS IS NAM NAM
-
-this is alec on a new branch
